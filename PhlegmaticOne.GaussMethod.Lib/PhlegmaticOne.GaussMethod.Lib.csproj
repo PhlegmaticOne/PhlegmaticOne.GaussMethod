@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Parsers\" />
-    <Folder Include="Algorithms\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

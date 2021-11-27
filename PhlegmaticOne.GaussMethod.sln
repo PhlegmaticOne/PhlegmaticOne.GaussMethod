@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhlegmaticOne.GaussMethod.Lib", "PhlegmaticOne.GaussMethod.Lib\PhlegmaticOne.GaussMethod.Lib.csproj", "{52C3BAF6-22C9-494B-AC98-5F358008283F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhlegmaticOne.GaussMethod.LibTests", "PhlegmaticOne.GaussMethod.LibTests\PhlegmaticOne.GaussMethod.LibTests.csproj", "{57C53BCF-13AF-4C66-8602-CFDF51D3F437}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{52C3BAF6-22C9-494B-AC98-5F358008283F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52C3BAF6-22C9-494B-AC98-5F358008283F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52C3BAF6-22C9-494B-AC98-5F358008283F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57C53BCF-13AF-4C66-8602-CFDF51D3F437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57C53BCF-13AF-4C66-8602-CFDF51D3F437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57C53BCF-13AF-4C66-8602-CFDF51D3F437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57C53BCF-13AF-4C66-8602-CFDF51D3F437}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
