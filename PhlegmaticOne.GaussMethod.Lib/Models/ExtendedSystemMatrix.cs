@@ -2,7 +2,7 @@
 
 namespace PhlegmaticOne.GaussMethod.Lib.Models;
 
-public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>
+public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>, ICloneable
 {
     private readonly double[,] _coefficientMatrix;
     public ExtendedSystemMatrix(double[,] coefficientMatrix) => _coefficientMatrix = coefficientMatrix;
@@ -14,9 +14,9 @@ public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>
         if (rowNumber < 0 || rowNumber > RowCount)
             throw new InvalidOperationException(
                 "Row number cannot be less than zero or more than system matrix row count");
+
         for (int i = 0; i < ColumnCount; ++i) _coefficientMatrix[rowNumber, i] *= number;
     }
-
     public void SwapRows(int rowNumberFirst, int rowNumberSecond)
     {
         if (rowNumberFirst < 0 || rowNumberFirst > RowCount)
@@ -25,7 +25,6 @@ public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>
         if (rowNumberSecond < 0 || rowNumberSecond > RowCount)
             throw new InvalidOperationException(
                 "Row number cannot be less than zero or more than system matrix row count");
-
         if (rowNumberFirst == rowNumberSecond)
             return;
 
@@ -38,7 +37,6 @@ public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>
             _coefficientMatrix[rowNumberSecond, i] = buffer[i];
         }
     }
-
     public int GetLeadingRowIndex(int startRowIndexToSearch, int columnPosition)
     {
         if (columnPosition < 0 || columnPosition > ColumnCount)
@@ -61,7 +59,6 @@ public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>
 
         return resultIndex;
     }
-
     public void SubtractRowMultipliedBy(int rowNumberToSubtract, int rowNumberToBeSubtracted, double multipleCoefficient)
     {
         if (rowNumberToSubtract < 0 || rowNumberToSubtract > RowCount)
@@ -70,35 +67,19 @@ public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>
         if (rowNumberToBeSubtracted < 0 || rowNumberToBeSubtracted > RowCount)
             throw new InvalidOperationException(
                 "Row number cannot be less than zero or more than system matrix row count");
+
         for (int i = 0; i < ColumnCount; i++)
             _coefficientMatrix[rowNumberToSubtract, i] -=
                 _coefficientMatrix[rowNumberToBeSubtracted, i] * multipleCoefficient;
     }
-
     public double[] LastColumn()
     {
         var result = new double[RowCount];
         for (int i = 0; i < RowCount; ++i) result[i] = _coefficientMatrix[i, RowCount];
         return result;
     }
-
-    public override string ToString()
-    {
-        var sb = new StringBuilder();
-        var cols = ColumnCount;
-        var rows = RowCount;
-        for (int i = 0; i < rows; i++)
-        {
-            sb.Append("{");
-            for (int j = 0; j < cols; j++)
-            {
-                sb.Append(j == cols - 1 ? $"{_coefficientMatrix[i, j]} " : $"{_coefficientMatrix[i, j]}, ");
-            }
-            sb.AppendLine("}");
-        }
-        return sb.ToString();
-    }
-
+    public override string ToString() => $"Variables: {RowCount}";
+    public object Clone() => new ExtendedSystemMatrix(_coefficientMatrix);
     public bool Equals(ExtendedSystemMatrix? other)
     {
         if (ReferenceEquals(null, other)) return false;
@@ -107,23 +88,20 @@ public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>
         {
             for (int j = 0; j < ColumnCount; j++)
             {
-                if (Math.Abs(_coefficientMatrix[i, j] - other._coefficientMatrix[i, j]) > double.Epsilon)
+                if (Math.Abs(_coefficientMatrix[i, j] - other._coefficientMatrix[i, j]) > 100 * double.Epsilon)
                 {
                     return false;
                 }
             }
         }
-
         return true;
     }
-
     public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != this.GetType()) return false;
-        return Equals((ExtendedSystemMatrix) obj);
+        return Equals(obj as ExtendedSystemMatrix);
     }
-
     public override int GetHashCode() => _coefficientMatrix.GetHashCode();
 }

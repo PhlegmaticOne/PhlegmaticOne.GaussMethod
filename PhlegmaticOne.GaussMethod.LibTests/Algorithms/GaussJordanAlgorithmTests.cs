@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PhlegmaticOne.GaussMethod.Lib.Models;
 
 namespace PhlegmaticOne.GaussMethod.Lib.Algorithms.Tests;
@@ -17,9 +19,9 @@ public class GaussJordanAlgorithmTests
         };
         var extendedSystemMatrix = new ExtendedSystemMatrix(matrix);
         var algorithm = new GaussParallelAlgorithm(extendedSystemMatrix);
-        var result = algorithm.Solve();
-        Assert.AreEqual(2, result[0]);
-        Assert.AreEqual(3, result[1]);
-        Assert.AreEqual(-1, result[2]);
+        var answersVector = algorithm.Solve(new List<string>(){"x1", "x2", "x3"});
+        Assert.AreEqual(2, answersVector["x1"]);
+        Assert.AreEqual(3, answersVector["x2"]);
+        Assert.AreEqual(-1, answersVector["x3"]);
     }
 }
