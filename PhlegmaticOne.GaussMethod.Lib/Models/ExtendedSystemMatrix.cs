@@ -5,7 +5,32 @@ namespace PhlegmaticOne.GaussMethod.Lib.Models;
 public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>, ICloneable
 {
     private readonly double[,] _coefficientMatrix;
-    public ExtendedSystemMatrix(double[,] coefficientMatrix) => _coefficientMatrix = coefficientMatrix;
+    public ExtendedSystemMatrix(double[,] coefficientMatrix)
+    {
+        if (coefficientMatrix.GetLength(0) + 1 != coefficientMatrix.GetLength(1))
+        {
+            throw new InvalidOperationException();
+        }
+        _coefficientMatrix = coefficientMatrix;
+    }
+
+    internal ExtendedSystemMatrix(IEnumerable<IEnumerable<double>> coefficientMatrix)
+    {
+        if (coefficientMatrix is null) throw new ArgumentNullException(nameof(coefficientMatrix));
+        if (coefficientMatrix.Count() + 1 != coefficientMatrix.First().Count())
+        {
+            throw new InvalidOperationException();
+        }
+
+        _coefficientMatrix = new double[coefficientMatrix.Count(), coefficientMatrix.First().Count()];
+        for (int i = 0; i < coefficientMatrix.Count(); i++)
+        {
+            for (int j = 0; j < coefficientMatrix.First().Count(); j++)
+            {
+                _coefficientMatrix[i, j] = coefficientMatrix.ElementAt(i).ElementAt(j);
+            }
+        }
+    }
     public int RowCount => _coefficientMatrix.GetLength(0);
     public int ColumnCount => _coefficientMatrix.GetLength(1);
     public double this[int row, int column] => _coefficientMatrix[row, column];

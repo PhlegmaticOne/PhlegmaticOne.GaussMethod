@@ -11,14 +11,14 @@ public class GaussJordanAlgorithmTests
     [TestMethod()]
     public void SolveTest()
     {
-        var matrix = new double[3, 4]
+        var matrix = new double[,]
         {
             {2, 1, -1, 8},
             {-3, -1, 2, -11},
             {-2, 1, 2, -3}
         };
         var extendedSystemMatrix = new ExtendedSystemMatrix(matrix);
-        var algorithm = new GaussParallelAlgorithm(extendedSystemMatrix);
+        var algorithm = new GaussJordanAlgorithm(extendedSystemMatrix);
         var answersVector = algorithm.Solve(new List<string>(){"x1", "x2", "x3"});
         Assert.AreEqual(2, answersVector["x1"]);
         Assert.AreEqual(3, answersVector["x2"]);
