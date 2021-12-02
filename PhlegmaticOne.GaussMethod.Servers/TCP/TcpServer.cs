@@ -2,15 +2,20 @@
 using System.Text;
 
 namespace PhlegmaticOne.GaussMethod.Servers.TCP;
-
+/// <summary>
+/// Tcp server implementation
+/// </summary>
 public class TcpServer : ServerBase
 {
     private readonly TcpListener _listener;
     private readonly CancellationTokenSource _cancellationTokenSource;
-
+    /// <summary>
+    /// Initializes new TcpServer instance
+    /// </summary>
+    /// <param name="ip">Specified ip</param>
+    /// <param name="port">Specified port</param>
     public TcpServer(string ip, int port) : base(ip, port) =>
         (_listener, _cancellationTokenSource) = (new TcpListener(IpAddress, port), new());
-
     public override async Task StartListeningAsync()
     {
         _listener.Start();
@@ -39,9 +44,7 @@ public class TcpServer : ServerBase
             _listener.Stop();
         }
     }
-
     public override void Stop() => _cancellationTokenSource.Cancel();
-
     protected override string ConfigureResponseBody(string request)
     {
         if (request.Contains("HTTP"))
@@ -53,13 +56,10 @@ public class TcpServer : ServerBase
         var responseBody = $"Received message: {body}. Answer: Request accepted";
         return $"Received message: {body}. Answer: Request accepted";
     }
-
     protected override string ToResponse(string request)
     {
         string body = ConfigureResponseBody(request);
         return new StringBuilder().AppendLine($"Destination IP: {IpAddress}").AppendLine($"Destination port: {Port}")
                                   .AppendLine($"Content-Length: {body.Length}").AppendLine($"[ {body} ]").ToString();
     }
-
-    ~TcpServer() => Stop();
 }

@@ -10,4 +10,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PhlegmaticOne.GaussMethod.Common\PhlegmaticOne.GaussMethod.CommonNet.csproj" />
+  </ItemGroup>
+
 </Project>

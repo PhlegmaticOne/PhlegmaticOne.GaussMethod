@@ -1,5 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
+using PhlegmaticOne.GaussMethod.Servers.Responds;
 
 namespace PhlegmaticOne.GaussMethod.Servers.HTTP.Tests;
 
@@ -12,6 +13,13 @@ public class HttpServerTests
     public async Task HttpServerTest()
     {
         var server = new HttpServer(TESTED_IP, TESTED_PORT);
+        await server.StartListeningAsync();
+    }
+    [TestMethod()]
+    public async Task HttpServerTestWithEvent()
+    {
+        var server = new HttpServer(TESTED_IP, TESTED_PORT);
+        server.OnRequestReceived += (object sender, string request) => DefaultHttpResponses.OK;
         await server.StartListeningAsync();
     }
 }

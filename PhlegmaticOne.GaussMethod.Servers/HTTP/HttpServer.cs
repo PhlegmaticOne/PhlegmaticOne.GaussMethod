@@ -1,18 +1,23 @@
-﻿using System.Reflection;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using PhlegmaticOne.GaussMethod.Servers.Extensions;
 using PhlegmaticOne.GaussMethod.Servers.TCP;
+using System.Reflection;
 
 namespace PhlegmaticOne.GaussMethod.Servers.HTTP;
-
+/// <summary>
+/// Http server implementation
+/// </summary>
 public class HttpServer : TcpServer
 {
+    /// <summary>
+    /// Initializes new HttpServer instance
+    /// </summary>
+    /// <param name="ip">Specified ip</param>
+    /// <param name="port">Specified port</param>
     public HttpServer(string ip, int port) : base(ip, port) { }
-
     protected override string ToResponse(string request)
     {
-        string body = string.Empty;
-        string responseType = string.Empty;
+        string body, responseType;
         try
         {
             body = ConfigureResponseBody(request);
@@ -25,12 +30,11 @@ public class HttpServer : TcpServer
         }
         return $"{responseType}\nServer: local / 1.6.2\nDate: {DateTime.Now}\nContent-Type: text/html\nContent-Length: {body.Length}\nConnection: close\n[ {body} ]";
     }
-
     protected override string ConfigureResponseBody(string request)
     {
         if (request.Contains("GET"))
         {
-            return "Send POST request";
+            return "Request was processed";
         }
 
         if (request.Contains("POST"))

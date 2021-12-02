@@ -2,6 +2,9 @@
 
 public static class StringExtensions
 {
+    /// <summary>
+    /// Reruns string between two entries
+    /// </summary>
     public static string Between(this string source, string from, string to)
     {
         var firstIndex = source.IndexOf(from);

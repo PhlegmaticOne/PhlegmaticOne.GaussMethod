@@ -1,11 +1,13 @@
-﻿using System.Collections;
-using System.Text.RegularExpressions;
-using PhlegmaticOne.GaussMethod.Lib.Constants;
+﻿using PhlegmaticOne.GaussMethod.Lib.Constants;
 using PhlegmaticOne.GaussMethod.Lib.Extensions;
 using PhlegmaticOne.GaussMethod.Lib.Models;
+using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace PhlegmaticOne.GaussMethod.Lib.Parsers;
-
+/// <summary>
+/// Represents instance which parses matrix from elements like 4a, -5b, 2.233c etc
+/// </summary>
 public class LettersPatternParser : MatrixParserBase
 {
     public override Regex CoefficientWithVariablePattern => new(@"^-?(\d)+\*?[a-zA-Z]$");

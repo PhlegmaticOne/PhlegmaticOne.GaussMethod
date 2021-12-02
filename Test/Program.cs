@@ -1,43 +1,61 @@
-﻿//var client = new PhlegmaticOne.GaussMethod.Clients.TCP.TcpClient("127.0.0.1", 8080);
-//await client.ConnectAsync();
-//await client.SendMessage("Hello");
+﻿using PhlegmaticOne.GaussMethod.Lib.Algorithms;
+using PhlegmaticOne.GaussMethod.Lib.Models;
+using System.Diagnostics;
 
-//using System.Net.Sockets;
-//using System.Text;
+var paramssss = new List<double[]>
+{
+    new double[] {5, 30},
+    new double[] {10, 30},
+    new double[] {50, 30},
+    new double[] {100, 30},
+    new double[] {250, 30},
+    new double[] {500, 30},
+    new double[] {1000, 30},
+};
+foreach (var par in paramssss)
+{
+    var comparing = new CompareGaussAlgorithms();
+    var matrix = comparing.GenerateMatrixWithRows((int)par[0], par[1]);
+    var system = new ExtendedSystemMatrix(matrix);
+    var times = comparing.SolveWith( new GaussJordanAlgorithm(system.Clone() as ExtendedSystemMatrix),
+                                                                    new GaussParallelAlgorithm(system.Clone() as ExtendedSystemMatrix));
+    foreach (var tuple in times)
+    {
+        Console.WriteLine("\n\n\n");
+        Console.WriteLine($"Rows in matrix: {(int)par[0]}\n");
+        Console.WriteLine("Algorithm: {0} - Time: {1}", tuple.Item1, tuple.Item2);
+    }
+}
+Console.ReadLine();
 
-//using var client = new TcpClient();
+internal class CompareGaussAlgorithms
+{
+    private static Random _random = new();
+    internal double[,] GenerateMatrixWithRows(int rowsCount, double maxNumberModule)
+    {
+        var matrix = new double[rowsCount, rowsCount + 1];
+        for (int i = 0; i < rowsCount; i++)
+        {
+            for (int j = 0; j < rowsCount + 1; j++)
+            {
+                matrix[i, j] = _random.NextDouble() * maxNumberModule;
+            }
+        }
 
-//var hostname = "webcode.me";
-//client.Connect(hostname, 80);
+        return matrix;
+    }
+    internal List<Tuple<string, TimeSpan>> SolveWith(params GaussAlgorithm[] algorithms)
+    {
+        var result = new List<Tuple<string, TimeSpan>>();
+        foreach (var algorithm in algorithms)
+        {
+            var timer = new Stopwatch();
+            timer.Start();
+            algorithm.Solve();
+            timer.Stop();
+            result.Add(new Tuple<string, TimeSpan>(algorithm.GetType().Name, timer.Elapsed));
+        }
 
-//using NetworkStream networkStream = client.GetStream();
-//networkStream.ReadTimeout = 2000;
-
-//using var writer = new StreamWriter(networkStream);
-
-//var message = "HEAD / HTTP/1.1\r\nHost: webcode.me\r\nUser-Agent: C# program\r\n"
-//              + "Connection: close\r\nAccept: text/html\r\n\r\n";
-
-//Console.WriteLine(message);
-
-//using var reader = new StreamReader(networkStream, Encoding.UTF8);
-
-//byte[] bytes = Encoding.UTF8.GetBytes(message);
-//networkStream.Write(bytes, 0, bytes.Length);
-
-//Console.WriteLine(reader.ReadToEnd());
-
-
-using PhlegmaticOne.GaussMethod.Servers.Extensions;
-
-var from = "Action: ";
-var to = "\n";
-var source = "Controller: Gauss\nAction: Solve\nData: adsasdasda";
-var firstIndex = source.IndexOf(from);
-var secondIndex = source.IndexOf(to, firstIndex);
-var length = secondIndex - firstIndex;
-var s = length < 0 ? source.Substring(firstIndex + from.Length) :
-    source.Substring(firstIndex + from.Length, length - from.Length);
-
-
-Console.WriteLine(s);
+        return result;
+    }
+}

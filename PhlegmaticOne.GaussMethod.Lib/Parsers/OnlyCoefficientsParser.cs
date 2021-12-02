@@ -1,10 +1,11 @@
-﻿using System.Collections;
-using System.Security.Cryptography.X509Certificates;
+﻿using PhlegmaticOne.GaussMethod.Lib.Models;
+using System.Collections;
 using System.Text.RegularExpressions;
-using PhlegmaticOne.GaussMethod.Lib.Models;
 
 namespace PhlegmaticOne.GaussMethod.Lib.Parsers;
-
+/// <summary>
+/// Represents instance which parses matrix from elements like 4, -5, 2.233 etc
+/// </summary>
 public class OnlyCoefficientsParser : MatrixParserBase
 {
     public override Regex CoefficientWithVariablePattern => new(@"^-?(\d)+$");

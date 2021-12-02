@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PhlegmaticOne.GaussMethod.Common\PhlegmaticOne.GaussMethod.CommonNet.csproj" />
     <ProjectReference Include="..\PhlegmaticOne.GaussMethod.Lib\PhlegmaticOne.GaussMethod.Lib.csproj" />
   </ItemGroup>
 
