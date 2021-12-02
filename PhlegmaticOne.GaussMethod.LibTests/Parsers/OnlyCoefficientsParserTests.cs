@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PhlegmaticOne.GaussMethod.Lib.Algorithms;
 using PhlegmaticOne.GaussMethod.Lib.MatrixGetters;
@@ -21,8 +21,9 @@ public class OnlyCoefficientsParserTests
             MatrixParser.TryParse<string>(matrixRepresentation, out ExtendedSystemMatrix extendedSystemMatrix);
 
         var algorithm = new GaussParallelAlgorithm(extendedSystemMatrix);
+        algorithm.OnSolved += (sender, args) => Console.WriteLine(args.AnswersVector.Length); 
         var answersVector = algorithm.Solve(variableNames);
 
-
+        Assert.IsNotNull(answersVector);
     }
 }

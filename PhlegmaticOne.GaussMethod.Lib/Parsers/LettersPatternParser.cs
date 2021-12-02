@@ -24,7 +24,7 @@ public class LettersPatternParser : MatrixParserBase
             var rowAnswer = Convert.ToDouble(variablesWithCoefficients.Last());
             var coefficientsInRow = variablesWithCoefficients
                                                      .OrderBy(x => x.Last()).Skip(1)
-                                                     .Select(x => Regexes.DISGITS_REGEX.Matches(x).Select(y => Convert.ToDouble(y.Value)))
+                                                     .Select(x => Regexes.DIGITS_REGEX.Matches(x).Select(y => Convert.ToDouble(y.Value)))
                                                      .Spread().Append(rowAnswer);
             matrixCarcass.Add(coefficientsInRow);
         }

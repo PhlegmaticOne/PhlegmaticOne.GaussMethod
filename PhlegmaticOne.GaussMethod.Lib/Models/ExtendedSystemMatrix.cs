@@ -1,10 +1,10 @@
-﻿using System.Text;
-
-namespace PhlegmaticOne.GaussMethod.Lib.Models;
+﻿namespace PhlegmaticOne.GaussMethod.Lib.Models;
 
 public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>, ICloneable
 {
     private readonly double[,] _coefficientMatrix;
+    internal double[,] Matrix { get; }
+
     public ExtendedSystemMatrix(double[,] coefficientMatrix)
     {
         if (coefficientMatrix.GetLength(0) + 1 != coefficientMatrix.GetLength(1))
@@ -12,24 +12,25 @@ public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>, ICloneable
             throw new InvalidOperationException();
         }
         _coefficientMatrix = coefficientMatrix;
+        Matrix = coefficientMatrix.Clone() as double[,];
     }
 
     internal ExtendedSystemMatrix(IEnumerable<IEnumerable<double>> coefficientMatrix)
     {
         if (coefficientMatrix is null) throw new ArgumentNullException(nameof(coefficientMatrix));
-        if (coefficientMatrix.Count() + 1 != coefficientMatrix.First().Count())
-        {
-            throw new InvalidOperationException();
-        }
+        var rows = coefficientMatrix.Count();
+        var cols = coefficientMatrix.First().Count();
+        if (rows + 1 != cols) throw new InvalidOperationException();
 
-        _coefficientMatrix = new double[coefficientMatrix.Count(), coefficientMatrix.First().Count()];
-        for (int i = 0; i < coefficientMatrix.Count(); i++)
+        _coefficientMatrix = new double[rows, cols];
+        for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < coefficientMatrix.First().Count(); j++)
+            for (int j = 0; j < cols; j++)
             {
                 _coefficientMatrix[i, j] = coefficientMatrix.ElementAt(i).ElementAt(j);
             }
         }
+        Matrix = _coefficientMatrix.Clone() as double[,];
     }
     public int RowCount => _coefficientMatrix.GetLength(0);
     public int ColumnCount => _coefficientMatrix.GetLength(1);
@@ -97,7 +98,7 @@ public class ExtendedSystemMatrix : IEquatable<ExtendedSystemMatrix>, ICloneable
             _coefficientMatrix[rowNumberToSubtract, i] -=
                 _coefficientMatrix[rowNumberToBeSubtracted, i] * multipleCoefficient;
     }
-    public double[] LastColumn()
+    public double[] MainDiagonal()
     {
         var result = new double[RowCount];
         for (int i = 0; i < RowCount; ++i) result[i] = _coefficientMatrix[i, RowCount];

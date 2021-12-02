@@ -14,6 +14,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MatrixFiles", "MatrixFiles"
 		OnlyCoefficients5x5.txt = OnlyCoefficients5x5.txt
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhlegmaticOne.GaussMethod.Servers", "PhlegmaticOne.GaussMethod.Servers\PhlegmaticOne.GaussMethod.Servers.csproj", "{8D4EC380-68D8-488D-9EE4-790F6641C62E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhlegmaticOne.GaussMethod.Clients", "PhlegmaticOne.GaussMethod.Clients\PhlegmaticOne.GaussMethod.Clients.csproj", "{87EC4999-F66D-4375-96C6-C9225EF318A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhlegmaticOne.GaussMethod.ClientsTests", "PhlegmaticOne.GaussMethod.ClientsTests\PhlegmaticOne.GaussMethod.ClientsTests.csproj", "{C72C9831-9158-4C28-92E6-C1658D1D1024}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{9E9E82F5-A866-4053-BDED-D32855CC26DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhlegmaticOne.GaussMethod.ServersTests", "PhlegmaticOne.GaussMethod.ServersTests\PhlegmaticOne.GaussMethod.ServersTests.csproj", "{D219EC64-D53C-4FB5-B4F7-79BBD7D0695A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +38,26 @@ Global
 		{57C53BCF-13AF-4C66-8602-CFDF51D3F437}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57C53BCF-13AF-4C66-8602-CFDF51D3F437}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57C53BCF-13AF-4C66-8602-CFDF51D3F437}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D4EC380-68D8-488D-9EE4-790F6641C62E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D4EC380-68D8-488D-9EE4-790F6641C62E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D4EC380-68D8-488D-9EE4-790F6641C62E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D4EC380-68D8-488D-9EE4-790F6641C62E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87EC4999-F66D-4375-96C6-C9225EF318A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87EC4999-F66D-4375-96C6-C9225EF318A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87EC4999-F66D-4375-96C6-C9225EF318A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87EC4999-F66D-4375-96C6-C9225EF318A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C72C9831-9158-4C28-92E6-C1658D1D1024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C72C9831-9158-4C28-92E6-C1658D1D1024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C72C9831-9158-4C28-92E6-C1658D1D1024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C72C9831-9158-4C28-92E6-C1658D1D1024}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E9E82F5-A866-4053-BDED-D32855CC26DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E9E82F5-A866-4053-BDED-D32855CC26DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E9E82F5-A866-4053-BDED-D32855CC26DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E9E82F5-A866-4053-BDED-D32855CC26DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D219EC64-D53C-4FB5-B4F7-79BBD7D0695A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D219EC64-D53C-4FB5-B4F7-79BBD7D0695A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D219EC64-D53C-4FB5-B4F7-79BBD7D0695A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D219EC64-D53C-4FB5-B4F7-79BBD7D0695A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

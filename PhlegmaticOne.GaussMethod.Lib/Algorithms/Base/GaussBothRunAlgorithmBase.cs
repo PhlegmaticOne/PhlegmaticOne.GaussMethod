@@ -6,7 +6,12 @@ namespace PhlegmaticOne.GaussMethod.Lib.Algorithms;
 public abstract class GaussBothRunAlgorithmBase : GaussAlgorithm
 {
     protected GaussBothRunAlgorithmBase(ExtendedSystemMatrix extendedSystemMatrix) : base(extendedSystemMatrix) { }
-    public override double[] Solve() => StraightRun().ReverseRun().ExtendedSystemMatrix.LastColumn();
+    public override double[] Solve()
+    {
+        var result = StraightRun().ReverseRun().ExtendedSystemMatrix.MainDiagonal(); 
+        OnSystemSolved(result);
+        return result;
+    }
     public override AnswersVectorBase<T> Solve<T>(IEnumerable<T> variableNames) => new AnswersVector<T>(Solve(), variableNames);
     protected abstract Action<int> RowIteratingStraightAction { get; }
     protected abstract Action<int> RowIteratingReverseAction { get; }
